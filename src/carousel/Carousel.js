@@ -11,6 +11,8 @@ import {
     stackAnimatedStyles,
     tinderAnimatedStyles
 } from '../utils/animations';
+import ViewOverflow from 'react-native-view-overflow';
+const AnimatedViewOverflow = Animated.createAnimatedComponent(ViewOverflow);
 
 const IS_IOS = Platform.OS === 'ios';
 
@@ -1156,7 +1158,7 @@ export default class Carousel extends Component {
         }
 
         const animate = this._shouldAnimateSlides();
-        const Component = animate ? Animated.View : View;
+        const Component = animate ? AnimatedViewOverflow : ViewOverflow;
         const animatedStyle = animate ? this._getSlideInterpolatedStyle(index, animatedValue) : {};
 
         const parallaxProps = hasParallaxImages ? {
