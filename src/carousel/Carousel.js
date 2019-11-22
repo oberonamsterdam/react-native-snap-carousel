@@ -39,6 +39,7 @@ export default class Carousel extends Component {
         activeAnimationType: PropTypes.string,
         activeAnimationOptions: PropTypes.object,
         activeSlideAlignment: PropTypes.oneOf(['center', 'end', 'start']),
+        invertLastItemSlideAlignment: PropTypes.bool,
         activeSlideOffset: PropTypes.number,
         apparitionDelay: PropTypes.number,
         autoplay: PropTypes.bool,
@@ -77,6 +78,7 @@ export default class Carousel extends Component {
         activeAnimationOptions: null,
         activeSlideAlignment: 'center',
         activeSlideOffset: 20,
+        invertLastItemSlideAlignment: false,
         apparitionDelay: 0,
         autoplay: false,
         autoplayDelay: 1000,
@@ -1279,7 +1281,8 @@ export default class Carousel extends Component {
             sliderWidth,
             sliderHeight,
             style,
-            vertical
+            vertical,
+            invertLastItemSlideAlignment
         } = this.props;
 
         const containerStyle = [
@@ -1294,10 +1297,10 @@ export default class Carousel extends Component {
         const contentContainerStyle = [
             vertical ? {
                 paddingTop: this._getContainerInnerMargin(),
-                paddingBottom: this._getContainerInnerMargin(true)
+                paddingBottom: this._getContainerInnerMargin(!invertLastItemSlideAlignment)
             } : {
                 paddingLeft: this._getContainerInnerMargin(),
-                paddingRight: this._getContainerInnerMargin(true)
+                paddingRight: this._getContainerInnerMargin(!invertLastItemSlideAlignment)
             },
             contentContainerCustomStyle || {}
         ];
